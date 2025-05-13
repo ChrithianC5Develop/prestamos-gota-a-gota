@@ -30,7 +30,7 @@ Sistema de gestión de préstamos gota a gota con FastAPI.
 
 1. Clonar el repositorio:
 ```bash
-git clone https://github.com/tu-usuario/prestamos-gota-a-gota.git
+git clone https://github.com/ChrithianC5Develop/prestamos-gota-a-gota.git
 cd prestamos-gota-a-gota
 ```
 
