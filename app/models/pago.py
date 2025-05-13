@@ -18,6 +18,7 @@ class Pago(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     prestamo_id = Column(Integer, ForeignKey("prestamos.id"))
+    registrado_por_id = Column(Integer, ForeignKey("usuarios.id"))
     numero_cuota = Column(Integer)
     monto = Column(Float)
     fecha_programada = Column(DateTime)
@@ -26,6 +27,9 @@ class Pago(Base):
     
     # Relaciones
     prestamo = relationship("Prestamo", back_populates="pagos")
+    registrado_por = relationship("Usuario", back_populates="pagos_registrados")
+    notificaciones = relationship("Notificacion", back_populates="pago")
+    cobranzas = relationship("Cobranza", back_populates="pago")
 
     class Config:
-        orm_mode = True 
+        from_attributes = True 

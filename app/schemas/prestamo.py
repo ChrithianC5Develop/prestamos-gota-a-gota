@@ -6,6 +6,8 @@ from pydantic import BaseModel
 from datetime import datetime
 from typing import List, Optional
 from ..models.prestamo import FrecuenciaPago, EstadoPrestamo
+from .cliente import Cliente
+from .pago import Pago
 
 class PrestamoBase(BaseModel):
     cliente_id: int
@@ -33,11 +35,11 @@ class Prestamo(PrestamoBase):
     valor_cuota: float
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class PrestamoDetalle(Prestamo):
-    from .cliente import Cliente
-    from .pago import Pago
-    
     cliente: Cliente
-    pagos: List[Pago] 
+    pagos: List[Pago]
+
+    class Config:
+        from_attributes = True 

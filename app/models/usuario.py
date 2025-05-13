@@ -27,4 +27,7 @@ class Usuario(Base):
     # 🇺🇸 Relationships
     rol = relationship("Rol", back_populates="usuarios")
     prestamos_creados = relationship("Prestamo", back_populates="creado_por")
-    pagos_registrados = relationship("Pago", back_populates="registrado_por") 
+    pagos_registrados = relationship("Pago", back_populates="registrado_por")
+    notificaciones = relationship("Notificacion", back_populates="usuario")
+    cobranzas_asignadas = relationship("Cobranza", back_populates="cobrador")
+    rutas_asignadas = relationship("Ruta", back_populates="cobrador") 

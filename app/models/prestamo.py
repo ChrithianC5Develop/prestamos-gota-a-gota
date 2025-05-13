@@ -26,6 +26,7 @@ class Prestamo(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     cliente_id = Column(Integer, ForeignKey("clientes.id"))
+    creado_por_id = Column(Integer, ForeignKey("usuarios.id"))
     monto = Column(Float)
     interes = Column(Float)  # Tasa de interés en porcentaje
     plazo = Column(Integer)  # Número de cuotas
@@ -40,7 +41,9 @@ class Prestamo(Base):
     
     # Relaciones
     cliente = relationship("Cliente", back_populates="prestamos")
+    creado_por = relationship("Usuario", back_populates="prestamos_creados")
     pagos = relationship("Pago", back_populates="prestamo")
+    notificaciones = relationship("Notificacion", back_populates="prestamo")
 
     class Config:
-        orm_mode = True 
+        from_attributes = True 

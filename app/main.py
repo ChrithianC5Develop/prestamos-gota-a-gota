@@ -4,22 +4,31 @@
 """
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from .routers import usuarios, prestamos, pagos, notificaciones, cobranza, auth, clientes, rutas
 from .config import settings
 
 # 🇪🇸 Crear la aplicación FastAPI
 # 🇺🇸 Create FastAPI application
 app = FastAPI(
-    title=settings.PROJECT_NAME,
-    openapi_url=f"{settings.API_V1_PREFIX}/openapi.json",
-    docs_url=f"{settings.API_V1_PREFIX}/docs",
-    redoc_url=f"{settings.API_V1_PREFIX}/redoc",
+    title="Préstamos Gota a Gota API",
+    description="""
+    🇪🇸 API para el sistema de gestión de préstamos gota a gota.
+    Incluye gestión de préstamos, pagos, cobranzas y notificaciones.
+    
+    🇺🇸 API for the "gota a gota" loan management system.
+    Includes loan, payment, collection and notification management.
+    """,
+    version="1.0.0",
+    docs_url="/api/v1/docs",
+    redoc_url="/api/v1/redoc",
+    openapi_url="/api/v1/openapi.json"
 )
 
 # 🇪🇸 Configurar CORS
 # 🇺🇸 Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[str(origin) for origin in settings.BACKEND_CORS_ORIGINS],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -27,42 +36,71 @@ app.add_middleware(
 
 # 🇪🇸 Incluir los routers
 # 🇺🇸 Include routers
-from .routers import auth_router, usuarios_router, clientes_router, prestamos_router, pagos_router
-
 app.include_router(
-    auth_router,
-    prefix=f"{settings.API_V1_PREFIX}/auth",
-    tags=["Autenticación"]
+    auth.router,
+    prefix="/api/v1/auth",
+    tags=["Autenticación"],
+    responses={404: {"description": "No encontrado"}},
 )
 
 app.include_router(
-    usuarios_router,
-    prefix=f"{settings.API_V1_PREFIX}/usuarios",
-    tags=["Usuarios"]
+    usuarios.router,
+    prefix="/api/v1/usuarios",
+    tags=["Usuarios"],
+    responses={404: {"description": "No encontrado"}},
 )
 
 app.include_router(
-    clientes_router,
-    prefix=f"{settings.API_V1_PREFIX}/clientes",
-    tags=["Clientes"]
+    clientes.router,
+    prefix="/api/v1/clientes",
+    tags=["Clientes"],
+    responses={404: {"description": "No encontrado"}},
 )
 
 app.include_router(
-    prestamos_router,
-    prefix=f"{settings.API_V1_PREFIX}/prestamos",
-    tags=["Préstamos"]
+    prestamos.router,
+    prefix="/api/v1/prestamos",
+    tags=["Préstamos"],
+    responses={404: {"description": "No encontrado"}},
 )
 
 app.include_router(
-    pagos_router,
-    prefix=f"{settings.API_V1_PREFIX}/pagos",
-    tags=["Pagos"]
+    pagos.router,
+    prefix="/api/v1/pagos",
+    tags=["Pagos"],
+    responses={404: {"description": "No encontrado"}},
 )
 
-@app.get("/")
+app.include_router(
+    notificaciones.router,
+    prefix="/api/v1/notificaciones",
+    tags=["Notificaciones"],
+    responses={404: {"description": "No encontrado"}},
+)
+
+app.include_router(
+    cobranza.router,
+    prefix="/api/v1/cobranzas",
+    tags=["Cobranzas"],
+    responses={404: {"description": "No encontrado"}},
+)
+
+app.include_router(
+    rutas.router,
+    prefix="/api/v1/rutas",
+    tags=["Rutas"],
+    responses={404: {"description": "No encontrado"}},
+)
+
+@app.get("/", tags=["Root"])
 async def root():
     """
-    🇪🇸 Ruta raíz que redirige a la documentación
-    🇺🇸 Root route that redirects to documentation
+    🇪🇸 Endpoint raíz que muestra información básica de la API
+    🇺🇸 Root endpoint showing basic API information
     """
-    return {"message": "Bienvenido a la API de Prestamos Gota a Gota. Visite /api/v1/docs para la documentación."} 
+    return {
+        "app": "Préstamos Gota a Gota API",
+        "version": "1.0.0",
+        "docs": "/api/v1/docs",
+        "redoc": "/api/v1/redoc"
+    } 
