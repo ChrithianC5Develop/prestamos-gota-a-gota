@@ -51,7 +51,7 @@ This system is designed to support **Spanish and English**, allowing for greater
 
 ```bash
 # Clonar el repositorio / Clone the repository
-git clone https://github.com/ChristhianC5Develop/prestamos-gota-a-gota.git
+git clone https://github.com/ChrithianC5Develop/prestamos-gota-a-gota.git
 cd prestamos-gota-a-gota
 
 # Crear entorno virtual / Create virtual environment
