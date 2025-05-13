@@ -1,0 +1,53 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+🧠 Project Rules and Context for Cursor AI📌 Project Name: "Prestamos Gota a Gota"🎯 ObjectiveBuild a professional, multilingual, multiplatform loan management app named Prestamos Gota a Gota. It must support flexible loan repayment (daily, weekly, biweekly, monthly), secure user authentication, and role-based access. All code should be portfolio-ready, bilingual (English/Spanish), well-structured, and clean. The project will be hosted on GitHub.
+🛠️ Tech StackBackend: FastAPI (Python), MySQL, JWT Auth
+Web Frontend: Streamlit (Python)
+Mobile/Desktop Frontend: Kotlin Multiplatform with Jetpack Compose (Android/Desktop)
+Multilanguage Support: English/Spanish via JSON files
+Editors: Cursor AI (main), IntelliJ IDEA for KMP
+🗂️ Project Structureprestamos-gota-a-gota/
+├── backend/
+│   └── app/ (models, schemas, routes, services, db.py, main.py)
+├── frontend_web/
+├── frontend_kotlin/
+│   ├── androidMain/
+│   ├── desktopMain/
+│   └── commonMain/
+├── shared/
+├── REGLAS_CURSOR_IA.md
+└── README.md🔑 Core FeaturesRegister clients with unique ID (cedula/RUC/email)
+Create loans with schedule-based payments
+Track collections by day/week/month
+User login system with JWT
+Role system: Administrator, Collector
+Reports: daily collections, outstanding loans, summaries
+🌐 Multilanguage RequirementsAll UI texts must use a translation JSON file:
+{
+  "es": { "login": "Iniciar sesión" },
+  "en": { "login": "Log in" }
+}App must include a language selector (user preference-based)
+🧠 Commenting Standard (Bilingual)All code must include bilingual comments:
+# 🇪🇸 Calcula la cuota diaria
+# 🇺🇸 Calculates the daily installmentVariables and methods may use Spanish identifiers, but documentation must be in both languages.
+🧪 Best PracticesUse strong typing in Python and Kotlin
+MVVM for Kotlin
+Modular, reusable components
+Use JWT for all protected endpoints
+Use linters: black, flake8, isort
+Use Git feature branches and semantic commits (e.g., feat: agregar login, fix: JWT auth bug)
+Push frequently with clear commit messages
+🧬 TestingBackend: pytest
+Frontend KMP: Kotlin Test, Compose UI Testing
+Basic UI & logic coverage
+🤖 Cursor AI ExpectationsCursor must:
+Follow this document as system prompt / base rules
+Stay focused on this specific app’s requirements
+Avoid generating off-topic or irrelevant code
+Always include translation-ready text and bilingual comments
+Generate clean, modular, production-level code
+
+📘 Final NotesThis project will serve as a public portfolio reference. Maintain clarity, modularity, security, and professionalism throughout all generated code. Everything must be GitHub-ready and clear for future collaborators or clients.
